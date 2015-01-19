@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# This script automates the  changing of the Desktop Wallpaper 
+# This script automates the changing of the Desktop Wallpaper.
+#that is, it changes wallpaper after every 100 seconds and uses images from Downloads directory for use.
 
 #To  check version of Gnome
 # "gnome-session --version"
