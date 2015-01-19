@@ -17,13 +17,19 @@
 DIR="/home/vivek/Downloads"
 
 
-#Select the images( by selecting formats jpeg,jpg,png)
+#Select an image(by selecting from formats jpeg,jpg,png)
 #PIC=$(ls $TEST_DIR/*.jpeg $TEST_DIR/*.png $TEST_DIR/*.jpg |shuf -n1)
-PIC=$(ls $DIR/*.{jpeg,png,jpg}|shuf -n1)  # Better(since shorter
+#PIC=$(ls $DIR/*.{jpeg,png,jpg}|shuf -n1)  # Better(since shorter)
 
 #echo $PIC
 
+PIC_all=$(ls $DIR/*.{jpeg,png,jpg})
+for i in $PIC_all; do
+	gsettings set org.gnome.desktop.background picture-uri file://$i
+	sleep 100
+done
+
 #Set it as a desktop wallpaper
-gsettings set org.gnome.desktop.background picture-uri file://$PIC
+#gsettings set org.gnome.desktop.background picture-uri file://$PIC
 
 
