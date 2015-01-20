@@ -25,5 +25,5 @@ IFS=$'\n' # Very important otherwise treats filenames with spaces between them a
 COMMENT
 
 #Elegant one line solution
-vlc $DIR_2/*.{mpeg,mp3,mp4,mpg,flv,avi,mkv}
+vlc --random --loop $DIR_2/*.{mpeg,mp3,mp4,mpg,flv,avi,mkv}
 
