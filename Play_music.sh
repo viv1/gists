@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Script to select all the media in the given folder and play it using vlc
+#Script to select all the media in the given folder and play it in random order forever using vlc
 
 DIR_2="/media/vivek/7E36D45836D4134F/Users/vivek/Downloads"
 
