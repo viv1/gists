@@ -1,3 +1,9 @@
+#usr/bin/python
+
+# Couldn't get the code to run perfectly usin BeautifulSoup. Extracted using selenium instead.Code snippet for selenium version in other file.
+
+#Will come back to this later
+
 from bs4 import BeautifulSoup
 import urllib2
 
