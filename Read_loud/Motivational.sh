@@ -15,8 +15,11 @@ sed 's/~/told by /g' helper.txt > quotes.txt		#Convert ~ to "told by"
 #cat test.txt | tr "~" "told by  " > quotes.txt
 
 for i in {1..99}
+		
 do
-sed "${i} q;d" quotes.txt > helper.txt 		# Get the i'th line
+j=$(( ( RANDOM % 99 )  + 1 ))
+echo $j
+sed "${j} q;d" quotes.txt > helper.txt 		# Get the i'th line
 cat helper.txt					# display the line
 say -f helper.txt				# Read the line
 sleep 1200					# Go to sleep for 20 minutes(1200 sec)
