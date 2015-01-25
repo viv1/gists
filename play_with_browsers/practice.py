@@ -19,3 +19,59 @@ driver.find_element_by_link_text("Try Again").click()
 time.sleep(1)
 for i in range(100):
     driver.find_element_by_class_name("redtile").click()
+
+
+
+## cancel load
+FirefoxProfile customProfile = new FirefoxProfile();
+customProfile.setAcceptUntrustedCertificates(true);
+customProfile.setPreference("network.http.connection-timeout", 10);
+customProfile.setPreference("network.http.connection-retry-timeout", 10);
+
+driver = new FirefoxDriver(firefox, customProfile);
+driver.manage().deleteAllCookies();
+
+##better way to cancel load
+WebDriverWait wait = new WebDriverWait(driver, 10);
+WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(By.id(>someid>)));
+
+
+
+
+#################### CAPTCHA ######################
+
+from PIL import Image
+
+img = Image.open('captcha.jpg Your image here!
+img = img.convert("RGBA")
+
+pixdata = img.load()
+
+# Make the letters bolder for easier recognition
+
+for y in xrange(img.size[1]):
+ for x in xrange(img.size[0]):
+ if pixdata[x, y][0] < 90:
+ pixdata[x, y] = (0, 0, 0, 255)
+
+for y in xrange(img.size[1]):
+ for x in xrange(img.size[0]):
+ if pixdata[x, y][1] < 136:
+ pixdata[x, y] = (0, 0, 0, 255)
+
+for y in xrange(img.size[1]):
+ for x in xrange(img.size[0]):
+ if pixdata[x, y][2] > 0:
+ pixdata[x, y] = (255, 255, 255, 255)
+
+img.save("input-black.gifIF")
+
+#   Make the image bigger (needed for OCR)
+im_orig = Image.open('input-black.gifig = im_orig.resize((1000, 500), Image.NEAREST)
+
+ext = ".tif"
+big.save("input-NEARESTxt)
+
+#   Perform OCR using tesseract-ocr library
+from tesseract import image_to_string
+image = Image.open('input-NEAREST.tifrint image_to_string(image)
