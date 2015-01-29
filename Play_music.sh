@@ -3,7 +3,7 @@
 #Script to select all the media in the given folder and play it in random order forever using vlc
 
 DIR_2="/media/vivek/7E36D45836D4134F/Users/vivek/Downloads"
-
+DIR_3="$DIR/# Hindi Best Songs - [by SoUrCe_CoD3]"
 #To tell it to only split on newlines
 
 IFS=$'\n' # Very important otherwise treats filenames with spaces between them as separate files.(so big cause of headache)
@@ -25,5 +25,5 @@ IFS=$'\n' # Very important otherwise treats filenames with spaces between them a
 COMMENT
 
 #Elegant one line solution
-vlc --random --loop $DIR_2/*.{mpeg,mp3,mp4,mpg,flv,avi,mkv}
+vlc --random --loop $DIR_2/*.{mpeg,mp3,mp4,mpg,flv,avi,mkv} $DIR_3/*.mp3
 
