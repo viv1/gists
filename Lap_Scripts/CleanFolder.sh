@@ -11,12 +11,8 @@ read folder_name
 
 final_path="$dir_path/$folder_name"
 
-temp_path="$dir_path/../$folder_name"
+final_path2="$dir_path/*"
 
-mkdir $temp_path
+mkdir $final_path
 
-mv ${dir_path} $temp_path
-
-mkdir -p $dir_path
-
-mv $temp_path $dir_path 
+mv $final_path2 $final_path
