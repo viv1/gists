@@ -1,6 +1,8 @@
 
 import httplib2
 import pdfcrowd
+import pdfkit
+import os
 from bs4 import BeautifulSoup, SoupStrainer
 
 
@@ -29,7 +31,19 @@ def populateLink(last_page):
 			if elem.has_attr('href'):
 				link=elem['href']
 				if link.find(g4g)==0 and link.find('category') < 0 and link.find('tag')<0 and link.find('#')<0:
+					if(link.find('u')==0):
+						link=str(link)
 					page_links.append(link)
+
+
+def convertToPDF(page_links):
+	link_count=1
+	for i in page_links:
+		file_loc='/home/vivek/Downloads/GeeksforGeeks/dynamic-programming/'
+		file_name="dynamic-programming"+str(link_count)+".pdf"+str(link_count)
+		pdfkit.from_url(str(i), file_loc+file_name)
+		link_count=link_count+1
+
 
 
 if __name__ == '__main__':
@@ -42,10 +56,18 @@ if __name__ == '__main__':
 
 	page_links=[]
 
+	try:
+
+		os.makedirs('/home/vivek/Downloads/GeeksforGeeks/dynamic-programming')
+	except:
+		pass
 	total_pages=findPageCount(site)
+
 	populateLink(total_pages)
-	#print page_links
-	print len(page_links)+ "Links found"
+	print page_links
+	print str(len(page_links))+ "Links found"
+
+	convertToPDF(page_links)
 
 
 
