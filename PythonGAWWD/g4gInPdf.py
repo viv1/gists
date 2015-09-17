@@ -36,11 +36,11 @@ def populateLink(last_page):
 					page_links.append(link)
 
 
-def convertToPDF(page_links):
+def convertToPDF(page_links, type):
 	link_count=1
 	for i in page_links:
-		file_loc='/home/vivek/Downloads/GeeksforGeeks/dynamic-programming/'
-		file_name="dynamic-programming"+str(link_count)+".pdf"+str(link_count)
+		file_loc="/home/vivek/Downloads/GeeksforGeeks/"+type+"/"
+		file_name=type+str(link_count)+".pdf"
 		pdfkit.from_url(str(i), file_loc+file_name)
 		link_count=link_count+1
 
@@ -52,22 +52,34 @@ if __name__ == '__main__':
 
 	g4g="http://www.geeksforgeeks.org"
 
-	site="http://www.geeksforgeeks.org/tag/dynamic-programming/page/"
+	dict=["dynamic-programming","advance-data-structures", "Greedy-Algorithm", "backtracking", "pattern-searching", "divide-and-conquer", "MathematicalAlgo", "recursion", "geometric-algorithms", "other"]
 
+	tag_num=0
+	for li in dict:
+		tag_num=tag_num+1
+		print str(tag_num)+"-->"+ li
+
+	whichTag=input("Input tag number: ")
+
+
+	site="http://www.geeksforgeeks.org/tag/"+dict[whichTag-1]+"/page/"
 	page_links=[]
 
 	try:
-
-		os.makedirs('/home/vivek/Downloads/GeeksforGeeks/dynamic-programming')
+		dir_loc="/home/vivek/Downloads/GeeksforGeeks/"+dict[whichTag-1]
+		os.makedirs(dir_loc)
 	except:
 		pass
+
 	total_pages=findPageCount(site)
 
 	populateLink(total_pages)
 	print page_links
-	print str(len(page_links))+ "Links found"
+	print str(len(page_links))+ " Links found"
 
-	convertToPDF(page_links)
+	convertToPDF(page_links, dict[whichTag-1])
+
+	print "Conversion completed Successfully"
 
 
 
