@@ -1,4 +1,6 @@
-
+#Script to convert HTML pages of geeksforgeeks into pdf and save it in your Downloads directory.
+#Identifies pages to be converted based on tags
+#Uses pdfkit to convert html to pdf and httplib2 and BeautifulSoup to get requested page and parsing
 import httplib2
 import pdfcrowd
 import pdfkit
@@ -7,7 +9,6 @@ from bs4 import BeautifulSoup, SoupStrainer
 
 
 #finds number of pages with given tag
-
 def findPageCount(link):
 	curr_page_tag=[]
 	page_count=0
@@ -17,7 +18,7 @@ def findPageCount(link):
 		curr_page_tag=BeautifulSoup(content, parse_only=SoupStrainer(content="Page Not Found - GeeksforGeeks"))
 	return (page_count-1)
 	
-
+#Populates based on asked for Tag 
 def populateLink(last_page):
 	for page_num in range(1, last_page+1):
 		(status, content) = http.request(site+str(page_num))
@@ -35,13 +36,16 @@ def populateLink(last_page):
 						link=str(link)
 					page_links.append(link)
 
-
+#html to pdf conversion
 def convertToPDF(page_links, type):
 	link_count=1
 	for i in page_links:
 		file_loc="/home/vivek/Downloads/GeeksforGeeks/"+type+"/"
 		file_name=type+str(link_count)+".pdf"
-		pdfkit.from_url(str(i), file_loc+file_name)
+		try:
+			pdfkit.from_url(str(i), file_loc+file_name)
+		except:
+			print("Some conversion error in "+ str(i))
 		link_count=link_count+1
 
 
