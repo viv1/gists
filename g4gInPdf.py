@@ -1,10 +1,18 @@
-#Script to convert HTML pages of geeksforgeeks into pdf and save it in your Downloads directory.
-#Identifies pages to be converted based on tags
-#Uses pdfkit to convert html to pdf and httplib2 and BeautifulSoup to get requested page and parsing
+""" 
+Script to convert HTML pages of geeksforgeeks into pdf and save it in your Downloads directory.
+Identifies pages to be converted based on tags
+Uses pdfkit to convert html to pdf and httplib2 and BeautifulSoup to get requested page and parsing
+
+@author:Vivek Sahu
+"""
+"""
+Running instructions
+>>>python g4gInPdf.py
+"""
 import httplib2
-import pdfcrowd
 import pdfkit
 import os
+import sys
 from bs4 import BeautifulSoup, SoupStrainer
 
 
@@ -24,7 +32,7 @@ def populateLink(last_page):
 		(status, content) = http.request(site+str(page_num))
 
 		soup = BeautifulSoup(content)
-		div_content = soup.find("section", {"class": "site-content"})
+		div_content = soup.find("section", {"class": "site-content"})#Filter out unncessary links
 		
 		div_tags=div_content.find_all("a")
 
@@ -64,9 +72,17 @@ if __name__ == '__main__':
 		print str(tag_num)+"-->"+ li
 
 	whichTag=input("Input tag number: ")
+	other_tag_name=""
 
+	if whichTag<10:
+		site="http://www.geeksforgeeks.org/tag/"+dict[whichTag-1]+"/page/"
+	else:
+		other_tag_name=raw_input("Input tag name: ")
+		other_tag_name= other_tag_name.lower()
+		#print(other_tag_name)
+		site="http://www.geeksforgeeks.org/tag/"+other_tag_name+"/page/"
+	
 
-	site="http://www.geeksforgeeks.org/tag/"+dict[whichTag-1]+"/page/"
 	page_links=[]
 
 	try:
@@ -76,6 +92,9 @@ if __name__ == '__main__':
 		pass
 
 	total_pages=findPageCount(site)
+	if total_pages==0:
+		print("No link with the given tag exists. Quiting program.")	
+		sys.exit()
 
 	populateLink(total_pages)
 	print page_links
