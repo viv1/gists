@@ -1,0 +1,1 @@
+This script extracts motivationl lines from a website(huffingtonpost.com) using selenium + python and then reads out the contents( contents are preprocessed slightly to make more sense) after certain interval.It uses bash utility 'say' for the purpose.
