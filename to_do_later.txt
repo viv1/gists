@@ -1,2 +1,3 @@
 To do later...
 App to record personal and work calls.
+Also move some subdirectories to a repo of their own.
